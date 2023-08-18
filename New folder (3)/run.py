@@ -24,7 +24,7 @@ app = Flask(__name__)
 
 app.config["MONGO_URI"] = "mongodb+srv://hiruvidu586:Hirushan2588071M@cluster0.4oftrlo.mongodb.net/test_db?retryWrites=true&w=majority"
 
-csv_file_path = "/home/ubuntu/Backend_Test/New folder (3)/google_review_ratings.csv"
+csv_file_path = "/home/ubuntu/Backend_Test/New folder (3)/google_review_ratings.csv"
 
 # mongodb database
 mongodb_client = PyMongo(app)
@@ -110,7 +110,7 @@ def handle_code():
         result = main(user_Id)
         
 
-        csv_file_path = "/home/ubuntu/Backend_Test/New folder (3)/google_review_ratings.csv"
+        csv_file_path = "/home/ubuntu/Backend_Test/New folder (3)/google_review_ratings.csv"
         input_data = pd.read_csv(csv_file_path)
         # Load the existing CSV file into a DataFrame
         updated_data = input_data._append(new_user_data, ignore_index=True)
@@ -175,7 +175,7 @@ def main(user_Id):
     print (user_Id)
 
 
-    csv_file_path = "/home/ubuntu/Backend_Test/New folder (3)/google_review_ratings.csv"
+    csv_file_path = "/home/ubuntu/Backend_Test/New folder (3)/google_review_ratings.csv"
     df_review = pd.read_csv(csv_file_path)
 
     
