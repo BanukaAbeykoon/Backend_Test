@@ -24,7 +24,7 @@ app = Flask(__name__)
 
 app.config["MONGO_URI"] = "mongodb+srv://hiruvidu586:Hirushan2588071M@cluster0.4oftrlo.mongodb.net/test_db?retryWrites=true&w=majority"
 
-csv_file_path = "/home/ubuntu/Backend_Test/New folder (3)/google_review_ratings.csv"
+csv_file_path = "C:/Users/BANU/Downloads/google_review_ratings.csv"
 
 # mongodb database
 mongodb_client = PyMongo(app)
@@ -110,7 +110,7 @@ def handle_code():
         result = main(user_Id)
         
 
-        csv_file_path = "/home/ubuntu/Backend_Test/New folder (3)/google_review_ratings.csv"
+        csv_file_path = "C:/Users/BANU/Downloads/google_review_ratings.csv"
         input_data = pd.read_csv(csv_file_path)
         # Load the existing CSV file into a DataFrame
         updated_data = input_data._append(new_user_data, ignore_index=True)
@@ -175,7 +175,7 @@ def main(user_Id):
     print (user_Id)
 
 
-    csv_file_path = "/home/ubuntu/Backend_Test/New folder (3)/google_review_ratings.csv"
+    csv_file_path = "C:/Users/BANU/Downloads/google_review_ratings.csv"
     df_review = pd.read_csv(csv_file_path)
 
     
@@ -242,7 +242,7 @@ def main(user_Id):
     
         sns.boxplot(df_review[variable], ax = subplot)
 
-    plt.show()
+    # plt.show()
 
     Q1 = df_review[['churches','resorts','beaches','burger_pizza_shops','hotels_other_lodgings','dance_clubs','swimming_pools','gyms','bakeries','beauty_spas','cafes','view_points','monuments','gardens']].quantile(0.25)
 
@@ -271,13 +271,13 @@ def main(user_Id):
     df_scaled = pd.DataFrame(df_scaled,columns=df_review.columns)
     df_scaled.shape
 
-    df_scaled.head()
+    # df_scaled.head()
 
     
 
     df_coll_filt_data = df.set_index('User', append=True).stack().reset_index().rename(columns={0:'rating', 'level_2':'Category'}).drop(columns=['level_0'])
 
-    df_coll_filt_data .head(30)
+    # df_coll_filt_data .head(30)
 
     reader = Reader(rating_scale=(1,5))  # rating scale
 
@@ -309,17 +309,17 @@ def main(user_Id):
     test_set = [[user_id, iid, 4] for iid in item_id]
 
     # Display the test set
-    print(test_set)
+    # print(test_set)
 
 
     pred = algo.test(test_set)
 
     rec = pd.DataFrame(pred).sort_values(by='est', ascending=False)
-    print(rec.head(10))
+    # print(rec.head(10))
 
     # Display the 'est' column data
     est_column_data = rec['est']
-    print(est_column_data)
+    # print(est_column_data)
 
     # Calculate the count of 'est' values
     est_count = rec['est'].count()
@@ -328,8 +328,8 @@ def main(user_Id):
     est_average = rec['est'].mean()
 
     # Print the count and average
-    print("Count of 'est' values:", est_count)
-    print("Average of 'est' values:", est_average)
+    # print("Count of 'est' values:", est_count)
+    # print("Average of 'est' values:", est_average)
 
     # Calculate the average of 'est' values
     est_average = rec['est'].mean()
@@ -338,8 +338,8 @@ def main(user_Id):
     est_above_average = rec[rec['est'] > est_average]['est']
 
     # Print the 'est' values above the average
-    print("EST values above the average:")
-    print(est_above_average,rec)
+    # print("EST values above the average:")
+    # print(est_above_average,rec)
     
 
     # Calculate the average of 'est' values
@@ -351,8 +351,8 @@ def main(user_Id):
 
 
     # Print the 'est' values and item names above the average
-    print("EST values and item names above the average:")
-    print(est_above_average)
+    # print("EST values and item names above the average:")
+    # print(est_above_average)
       
     est_average = rec['est'].mean()
 
@@ -363,12 +363,12 @@ def main(user_Id):
     iids_above_average = est_above_average['iid'].tolist()
 
     # Print the 'est' values and item names above the average
-    print("EST values and item names above the average:")
-    print(est_above_average)
+    # print("EST values and item names above the average:")
+    # print(est_above_average)
 
     # Print the list of item IDs above the average
-    print("Item IDs (iids) above the average:")
-    print(iids_above_average)
+    # print("Item IDs (iids) above the average:")
+    # print(iids_above_average)
 
     return iids_above_average
 
