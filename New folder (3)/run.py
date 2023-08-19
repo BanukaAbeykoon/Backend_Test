@@ -409,7 +409,7 @@ def run_algorithm():
    
  
     # Call main function
-    result = main(hotelCityy, hotelPricee)
+    result = mainn(hotelCityy, hotelPricee)
  
     hotelnew = {
        
@@ -422,7 +422,7 @@ def run_algorithm():
 
     return 'Success'
 
-def main(hotelCityy,hotelPricee):
+def mainn(hotelCityy,hotelPricee):
     hotelCityy=hotelCityy
     hotelPricee=hotelPricee
     data = pd.read_excel('/home/ubuntu/Backend_Test/New folder (3)/data_hotel.xlsx')
