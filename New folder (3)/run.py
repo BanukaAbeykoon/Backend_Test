@@ -443,7 +443,7 @@ def mainn(hotelCityy,hotelPricee):
     recomend(hotel,hotelCityy,hotelPricee)
  
     a = search_hotel(hotel, m, family='yes',city='surabaya',location='all').sort_values(by='price_per_night')
-    print(a)
+    # print(a)
     hotel_list = a[['hotel_name', 'hotel_description', 'hotel_address', 'price_per_night']].to_dict(orient='records')
     return hotel_list
  
