@@ -22,7 +22,7 @@ app = Flask(__name__)
 
 app.config["MONGO_URI"] = "mongodb+srv://hiruvidu586:Hirushan2588071M@cluster0.4oftrlo.mongodb.net/test_db?retryWrites=true&w=majority"
 
-csv_file_path = "C:/Users/BANU/Downloads/google_review_ratings.csv"
+csv_file_path = "/home/ubuntu/Backend_Test/New folder (3)/google_review_ratings.csv"
 
 # mongodb database
 mongodb_client = PyMongo(app)
@@ -91,7 +91,7 @@ def handle_code():
         result = main(user_Id)
         
 
-        csv_file_path = "C:/Users/BANU/Downloads/google_review_ratings.csv"
+        csv_file_path = "/home/ubuntu/Backend_Test/New folder (3)/google_review_ratings.csv"
         input_data = pd.read_csv(csv_file_path)
         # Load the existing CSV file into a DataFrame
         updated_data = input_data._append(new_user_data, ignore_index=True)
@@ -156,7 +156,7 @@ def main(user_Id):
     print (user_Id)
 
 
-    csv_file_path = "C:/Users/BANU/Downloads/google_review_ratings.csv"
+    csv_file_path = "/home/ubuntu/Backend_Test/New folder (3)/google_review_ratings.csv"
     df_review = pd.read_csv(csv_file_path)
 
     
@@ -407,11 +407,11 @@ def run_algorithmm():
 def mainn(hotelCityy,hotelPricee):
     hotelCityy=hotelCityy
     hotelPricee=hotelPricee
-    data = pd.read_excel('C:/Users/BANU/OneDrive - Sri Lanka Institute of Information Technology/Desktop/Backendtest/Backend_Test/New folder (3)/data_hotel.xlsx')
+    data = pd.read_excel('/home/ubuntu/Backend_Test/New folder (3)/data_hotel.xlsx')
     data['hotel_description'] = data['hotel_description'].fillna('tidak ada deskripsi')
     data[data['price_per_night'].isnull()]
     data.fillna(method='ffill',axis=0,inplace=True)
-    review = pd.read_excel('C:/Users/BANU/OneDrive - Sri Lanka Institute of Information Technology/Desktop/Backendtest/Backend_Test/New folder (3)/review_hotel.xlsx')
+    review = pd.read_excel('/home/ubuntu/Backend_Test/New folder (3)/review_hotel.xlsx')
     review[review['hotel_id'].isnull()]
     review.dropna(inplace=True)
     review_piv = review.pivot_table(index='hotel_id', aggfunc={'stay_duration':'mean','adults':'mean','children':'mean','rating':['mean','count']})
@@ -665,7 +665,7 @@ def mainnnn(StartLat, StartLon, EndLat, EndLon, Temples, Heritages, Beaches, Par
 
     # print("abc")
 
-    data = pd.read_csv("C:/Users/BANU/OneDrive - Sri Lanka Institute of Information Technology/Desktop/Backendtest/Backend_Test/New folder (3)/DataSet.csv")
+    data = pd.read_csv("/home/ubuntu/Backend_Test/New folder (3)/DataSet.csv")
 
    
 
@@ -1053,7 +1053,7 @@ def getMaxValue(ProbArr):
 
 def findNeares(disArr, StartLat, StartLon, EndLat, EndLon, df):
 
-    data = pd.read_csv("C:/Users/BANU/OneDrive - Sri Lanka Institute of Information Technology/Desktop/Backendtest/Backend_Test/New folder (3)/DataSet.csv")
+    data = pd.read_csv("/home/ubuntu/Backend_Test/New folder (3)/DataSet.csv")
 
     for i in range(1):
 
@@ -1157,7 +1157,7 @@ def find_min_value_position(disArr):
 
 def get_locations(abc):
 
-    data = pd.read_csv("C:/Users/BANU/OneDrive - Sri Lanka Institute of Information Technology/Desktop/Backendtest/Backend_Test/New folder (3)/DataSet.csv")  
+    data = pd.read_csv("/home/ubuntu/Backend_Test/New folder (3)/DataSet.csv")  
 
     abc.pop(0)
 
