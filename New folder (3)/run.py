@@ -1209,6 +1209,256 @@ def get_locations(abc):
 
     return final_start_places
 
+@app.route('/users', methods=['GET','POST'])
+
+def add_user():
+
+    if request.method == 'GET':
+
+        # Retrieve all users from the database
+
+        users = db.users.find()
+
+        user_list = []
+
+        for user in users:
+
+            user['_id'] = str(user['_id'])
+
+            user_list.append(user)
+
+        return jsonify({'users': user_list})
+
+ 
+
+    elif request.method == 'POST':
+
+        data = request.get_json()
+
+        username = data.get('username')
+
+        fristname = data.get('fristname')
+
+        lastname = data.get('lastname')
+
+        gender = data.get('gender')
+
+        age = data.get('age')
+
+        email = data.get('email')
+
+        telephone = data.get('telephone')
+
+        country = data.get('country')
+
+        password = data.get('password')
+
+ 
+
+        # Check if name and gender are provided
+
+        if not username or not gender or not age or not email or not telephone or not country or not fristname or not lastname or not password:
+
+            return jsonify({'message': 'All the data must be filled'}), 400
+
+       
+
+        existing_user = db.users.find_one({'username': username})
+
+        if existing_user:
+
+            return jsonify({'message': 'Username already exists'}), 400
+
+ 
+
+        # Create a new user document
+
+        user = {
+
+            'username': username,
+
+            'fristname' : fristname,
+
+            'lastname' : lastname,
+
+            'gender': gender,
+
+            'age' : age,
+
+            'email' : email,
+
+            'telephone' : telephone,
+
+            'country' : country,
+
+            'password' : password
+
+        }
+
+ 
+
+        # Insert the user into the database
+
+        result = db.users.insert_one(user)
+
+ 
+
+        return jsonify({'message': 'User added successfully', 'user_id': str(result.inserted_id)})
+
+ 
+
+@app.route('/users/<username>', methods=['GET'])
+
+def get_user(username):
+
+    # Retrieve the user from the database using the given username
+
+    user = db.users.find_one({'username': username})
+
+ 
+
+    if not user:
+
+        return jsonify({'message': 'User not found'}), 404
+
+ 
+
+    # Convert ObjectId to string for JSON serialization
+
+    user['_id'] = str(user['_id'])
+
+ 
+
+    return jsonify({'user': user})
+
+ 
+
+ 
+
+@app.route('/login', methods=['POST'])
+
+def login():
+
+    data = request.get_json()
+
+    username = data.get('username')
+
+    password = data.get('password')
+
+ 
+
+    if not username or not password:
+
+        return jsonify({'message': 'Username and password are required'}), 400
+
+ 
+
+    # Retrieve the user from the database based on the given username
+
+    user = db.users.find_one({'username': username})
+
+ 
+
+    if not user:
+
+        return jsonify({'message': 'User not found'}), 404
+
+ 
+
+    # Check if the password provided matches the password in the database
+
+    if user['password'] != password:
+
+        return jsonify({'message': 'Invalid password'}), 401
+
+ 
+
+    # If the username and password are correct, return a success message or any other data you want to provide to the user upon successful login
+
+    return jsonify({'message': 'Login successful', 'user_id': str(user['_id'])})
+
+ 
+
+ 
+
+@app.route('/users/<username>', methods=['DELETE'])
+
+def delete_user(username):
+
+    # Check if the user with the given username exists in the database
+
+    existing_user = db.users.find_one({'username': username})
+
+ 
+
+    if not existing_user:
+
+        return jsonify({'message': 'User not found'}), 404
+
+ 
+
+    # Delete the user from the database
+
+    db.users.delete_one({'username': username})
+
+ 
+
+    return jsonify({'message': 'User deleted successfully'})
+
+ 
+
+@app.route('/users/<username>', methods=['PUT'])
+
+def update_user(username):
+
+    # Retrieve the user from the database based on the given username
+
+    existing_user = db.users.find_one({'username': username})
+
+ 
+
+    if not existing_user:
+
+        return jsonify({'message': 'User not found'}), 404
+
+ 
+
+    # Get the updated user data from the request
+
+    data = request.get_json()
+
+ 
+
+    # Update the user's information
+
+    existing_user['fristname'] = data.get('fristname', existing_user['fristname'])
+
+    existing_user['lastname'] = data.get('lastname', existing_user['lastname'])
+
+    existing_user['gender'] = data.get('gender', existing_user['gender'])
+
+    existing_user['age'] = data.get('age', existing_user['age'])
+
+    existing_user['email'] = data.get('email', existing_user['email'])
+
+    existing_user['telephone'] = data.get('telephone', existing_user['telephone'])
+
+    existing_user['country'] = data.get('country', existing_user['country'])
+
+    existing_user['password'] = data.get('password', existing_user['password'])
+
+ 
+
+    # Update the user in the database
+
+    db.users.update_one({'username': username}, {'$set': existing_user})
+
+ 
+
+    return jsonify({'message': 'User updated successfully'})
+
+ 
+
 if __name__ == '__main__':
     serve(app, host="0.0.0.0", port=5000)
 
