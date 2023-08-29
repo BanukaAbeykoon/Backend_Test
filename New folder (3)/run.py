@@ -547,7 +547,7 @@ def run_algorithm():
 
     # Call main function
 
-    result = main(start_lat, start_lon, end_lat, end_lon, temple, heritages, beaches, parks, arts)
+    result = mainnnn(start_lat, start_lon, end_lat, end_lon, temple, heritages, beaches, parks, arts)
 
  
 
@@ -599,7 +599,7 @@ def run_algorithm():
 
  
 
-def main(StartLat, StartLon, EndLat, EndLon, Temples, Heritages, Beaches, Parks, Arts):
+def mainnnn(StartLat, StartLon, EndLat, EndLon, Temples, Heritages, Beaches, Parks, Arts):
 
     # print(StartLat)
 
