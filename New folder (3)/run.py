@@ -425,9 +425,9 @@ def mainn(hotelCityy,hotelPricee):
     m = hotel['rating_count'].quantile(.8)
     weight_rating(hotel,.8)
     hotel['hotel_city'].unique()
-    recomend(hotel,hotelCityy,hotelPricee)
+    ddd = recomend(hotel,hotelCityy,hotelPricee)
  
-    a = search_hotel(hotel, m, family='yes',city='surabaya',location='all').sort_values(by='price_per_night')
+    a = search_hotel(ddd, m, family='yes',city=hotelCityy,location='all').sort_values(by='price_per_night')
     # print(a)
     hotel_list = a[['hotel_name', 'hotel_description', 'hotel_address', 'price_per_night']].to_dict(orient='records')
     return hotel_list
@@ -448,17 +448,9 @@ def weight_rating(df,var):
 def recomend(hotel,hotelCityy,hotelPricee):
     print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
     print(hotel)
-    c = hotel['rating_mean'].mean()
-    hotel['rating_count'].unique()
-    m = hotel['rating_count'].quantile(.8)
-    weight_rating(hotel,.8)
-    hotel['hotel_city'].unique()
     print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
     city = hotelCityy.capitalize()
     max_price = hotelPricee
-    print('xxxxxxxxxxxxxxxxxxxxxxxxx')
-    print(max_price)
-    print('xxxxxxxxxxxxxxxxxxxxxxxxxx')
     df = hotel[(hotel['hotel_city']==city) & (hotel['price_per_night'] <= max_price)]
     df = df.sort_values(by='score', ascending = False).head()
     print(df)
