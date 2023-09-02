@@ -417,16 +417,12 @@ def mainn(hotelCityy,hotelPricee):
     review_piv = review.pivot_table(index='hotel_id', aggfunc={'stay_duration':'mean','adults':'mean','children':'mean','rating':['mean','count']})
     review_piv.columns = ['adults','children','rating_count','rating_mean','stay_duration']
     hotel = pd.merge(data,review_piv, on='hotel_id',how='inner')
-    print('ddddddddddddddddddddddddddddddd')
-    print(hotel)
-    print('ddddddddddddddddddddddddddddddd')
     c = hotel['rating_mean'].mean()
     hotel['rating_count'].unique()
     m = hotel['rating_count'].quantile(.8)
     weight_rating(hotel,.8)
     hotel['hotel_city'].unique()
     ddd = recomend(hotel,hotelCityy,hotelPricee)
- 
     a = search_hotel(ddd, m, family='yes',city=hotelCityy,location='all').sort_values(by='price_per_night')
     # print(a)
     hotel_list = a[['hotel_name', 'hotel_description', 'hotel_address', 'price_per_night']].to_dict(orient='records')
@@ -446,14 +442,10 @@ def weight_rating(df,var):
  
  
 def recomend(hotel,hotelCityy,hotelPricee):
-    print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-    print(hotel)
-    print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
     city = hotelCityy.capitalize()
     max_price = hotelPricee
     df = hotel[(hotel['hotel_city']==city) & (hotel['price_per_night'] <= max_price)]
     df = df.sort_values(by='score', ascending = False).head()
-    print(df)
     return df
  
  
