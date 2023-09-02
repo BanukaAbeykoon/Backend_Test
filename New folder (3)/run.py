@@ -447,6 +447,7 @@ def recomend(hotel,hotelCityy,hotelPricee):
     max_price = hotelPricee
     df = hotel[(hotel['hotel_city']==city) & (hotel['price_per_night'] <= max_price)]
     df = df.sort_values(by='score', ascending = False).head()
+    print(df)
     return df
  
  
