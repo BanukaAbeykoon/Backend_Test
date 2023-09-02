@@ -44,11 +44,11 @@ def main(hotelCityy,hotelPricee,hotelNamee):
     hotelCityy=hotelCityy
     hotelPricee=hotelPricee
     hotelNamee=hotelNamee
-    data = pd.read_excel('C:/Users/BANU/Downloads/data_hotel.xlsx')
+    data = pd.read_excel('/home/ubuntu/Backend_Test/New folder (3)/data_hotel.xlsx')
     data['hotel_description'] = data['hotel_description'].fillna('tidak ada deskripsi')
     data[data['price_per_night'].isnull()]
     data.fillna(method='ffill',axis=0,inplace=True)
-    review = pd.read_excel('C:/Users/BANU/Downloads/review_hotel.xlsx')
+    review = pd.read_excel('/home/ubuntu/Backend_Test/New folder (3)/review_hotel.xlsx')
     review[review['hotel_id'].isnull()]
     review.dropna(inplace=True)
     review_piv = review.pivot_table(index='hotel_id', aggfunc={'stay_duration':'mean','adults':'mean','children':'mean','rating':['mean','count']})
@@ -61,7 +61,7 @@ def main(hotelCityy,hotelPricee,hotelNamee):
     hotel['hotel_city'].unique()
     recomend(hotel,hotelCityy,hotelPricee)
 
-    a = search_hotel(hotel, m, family='yes',city='surabaya',location='all').sort_values(by='price_per_night')
+    a = search_hotel(hotel, m, family='yes',city=hotelCityy, location='all').sort_values(by='price_per_night')
     print(a)
 
     from sklearn.metrics.pairwise import cosine_similarity
@@ -200,6 +200,21 @@ def content_recommender(hotel_indices, indices, tf_sim, base, hotelNamee):
 
     
     return hotels
+
+@app.route('/displayhotel', methods=['GET'])
+def handle_hotel_display():
+        last_record = db.hotelTotalflask.find_one(sort=[('_id', -1)])
+
+        if last_record:
+            # Convert the record's _id to a string
+            last_record['_id'] = str(last_record['_id'])
+            
+            # Return the last record as a JSON response
+            return jsonify({'hotelTotalflask': last_record})
+
+        # Return an appropriate response if there are no records
+        return jsonify({'message': 'No records found'})
+ 
 
 if __name__ == '__main__':
     serve(app, host="0.0.0.0", port=5000)
