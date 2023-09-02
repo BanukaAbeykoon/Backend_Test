@@ -62,7 +62,7 @@ def main(hotelCityy,hotelPricee,hotelNamee):
     recomend(hotel,hotelCityy,hotelPricee)
 
     a = search_hotel(hotel, m, family='yes',city=hotelCityy, location='all').sort_values(by='price_per_night')
-    print(a)
+    # print(a)
 
     from sklearn.metrics.pairwise import cosine_similarity
     from sklearn.feature_extraction.text import TfidfVectorizer
@@ -74,7 +74,7 @@ def main(hotelCityy,hotelPricee,hotelNamee):
 
     hotel['desc_all'] = hotel.apply(join_feature,axis=1)
     b = hotel.head()
-    print(b)
+    # print(b)
 
     clean_spcl = re.compile('[/(){}\[\]\|@,;] ')
     clean_symbol = re.compile('[^0-9a-z #+_]')
@@ -84,7 +84,7 @@ def main(hotelCityy,hotelPricee,hotelNamee):
 
     hotel['desc_clean'] = hotel['desc_all'].apply(lambda x: clean_text(x, clean_spcl, clean_symbol, stopword, stopworda))
     c = hotel.head()
-    print(c)
+    # print(c)
 
     sastrawi = StopWordRemoverFactory()
     stop = sastrawi.get_stop_words()
@@ -103,7 +103,7 @@ def main(hotelCityy,hotelPricee,hotelNamee):
     # membuat matriks similarity score untuk tfidf
     tf_sim = cosine_similarity(tf_matrix,tf_matrix)
     tf_sim
-    print(tf_sim)
+    # print(tf_sim)
 
     # menjadikan nama hotel sebagai anchor index untuk input rekomendasi
     indices = pd.Series(hotel.index, index=hotel['hotel_name']).drop_duplicates()
@@ -181,7 +181,7 @@ def clean_text(text, clean_spcl, clean_symbol, stopword, stopworda):
 
 def content_recommender(hotel_indices, indices, tf_sim, base, hotelNamee):
     hotel = hotelNamee
-    print(hotel)
+    # print(hotel)
     
     idx = indices[hotel]
     
