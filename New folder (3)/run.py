@@ -448,9 +448,17 @@ def weight_rating(df,var):
 def recomend(hotel,hotelCityy,hotelPricee):
     print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
     print(hotel)
+    c = hotel['rating_mean'].mean()
+    hotel['rating_count'].unique()
+    m = hotel['rating_count'].quantile(.8)
+    weight_rating(hotel,.8)
+    hotel['hotel_city'].unique()
     print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
     city = hotelCityy.capitalize()
     max_price = hotelPricee
+    print('xxxxxxxxxxxxxxxxxxxxxxxxx')
+    print(max_price)
+    print('xxxxxxxxxxxxxxxxxxxxxxxxxx')
     df = hotel[(hotel['hotel_city']==city) & (hotel['price_per_night'] <= max_price)]
     df = df.sort_values(by='score', ascending = False).head()
     print(df)
