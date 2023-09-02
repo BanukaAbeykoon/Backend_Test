@@ -423,9 +423,9 @@ def mainn(hotelCityy,hotelPricee):
     weight_rating(hotel,.8)
     hotel['hotel_city'].unique()
     ddd = recomend(hotel,hotelCityy,hotelPricee)
-    a = search_hotel(ddd, m, family='yes',city=hotelCityy,location='all').sort_values(by='price_per_night')
+    # a = search_hotel(ddd, m, family='yes',city=hotelCityy,location='all').sort_values(by='price_per_night')
     # print(a)
-    hotel_list = a[['hotel_name', 'hotel_description', 'hotel_address', 'price_per_night']].to_dict(orient='records')
+    hotel_list = ddd[['hotel_name', 'hotel_description', 'hotel_address', 'price_per_night']].to_dict(orient='records')
     return hotel_list
  
  
