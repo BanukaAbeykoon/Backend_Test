@@ -417,6 +417,9 @@ def mainn(hotelCityy,hotelPricee):
     review_piv = review.pivot_table(index='hotel_id', aggfunc={'stay_duration':'mean','adults':'mean','children':'mean','rating':['mean','count']})
     review_piv.columns = ['adults','children','rating_count','rating_mean','stay_duration']
     hotel = pd.merge(data,review_piv, on='hotel_id',how='inner')
+    print('ddddddddddddddddddddddddddddddd')
+    print(hotel)
+    print('ddddddddddddddddddddddddddddddd')
     c = hotel['rating_mean'].mean()
     hotel['rating_count'].unique()
     m = hotel['rating_count'].quantile(.8)
