@@ -443,6 +443,9 @@ def weight_rating(df,var):
  
  
 def recomend(hotel,hotelCityy,hotelPricee):
+    print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+    print(hotel)
+    print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
     city = hotelCityy.capitalize()
     max_price = hotelPricee
     df = hotel[(hotel['hotel_city']==city) & (hotel['price_per_night'] <= max_price)]
